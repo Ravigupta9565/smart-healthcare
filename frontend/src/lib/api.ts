@@ -8,8 +8,8 @@ export function apiUrl(path: string): string {
     return normalizedPath;
   }
 
-  // Remove trailing slashes to prevent double slashes
-  const baseUrl = rawBaseUrl.replace(/\/+$/, "");
+  // Accept either the Render origin or an origin that already includes /api.
+  const baseUrl = rawBaseUrl.replace(/\/+$/, "").replace(/\/api$/, "");
   return `${baseUrl}${normalizedPath}`;
 }
 
@@ -48,5 +48,4 @@ export async function parseApiResponse<T = any>(res: Response): Promise<T> {
     throw new Error("Invalid response format received from server.");
   }
 }
-
 

@@ -16,6 +16,14 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Backend configuration
+
+Set `NEXT_PUBLIC_API_BASE_URL` to the deployed FastAPI origin (for example,
+`https://smart-healthcare-backend.onrender.com`) in the Vercel project
+environment variables. Do not include a trailing slash; an optional `/api`
+suffix is also normalized automatically. For server-side Next.js rewrites,
+`BACKEND_API_URL` may be set to the same Render origin.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

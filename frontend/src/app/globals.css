@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #020617;
+  --foreground: #f8fafc;
 }
 
 @theme inline {
@@ -12,12 +12,57 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Dark mode disabled — SmartHealth AI uses a consistent light + dark sidebar design */
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Keep every dashboard surface dark while preserving the public auth pages. */
+.dark-dashboard {
+  color: #f8fafc;
+}
+
+.dark-dashboard [class*="bg-gray-50"],
+.dark-dashboard [class*="bg-white"] {
+  background-color: rgb(15 23 42 / 0.72) !important;
+}
+
+.dark-dashboard [class*="from-gray-50"],
+.dark-dashboard [class*="via-white"],
+.dark-dashboard [class*="to-teal-50"] {
+  background-image: linear-gradient(
+    135deg,
+    rgb(2 6 23) 0%,
+    rgb(15 23 42 / 0.9) 55%,
+    rgb(13 78 74 / 0.28) 100%
+  ) !important;
+}
+
+.dark-dashboard [class~="text-gray-900"],
+.dark-dashboard [class~="text-gray-800"],
+.dark-dashboard [class~="text-gray-700"],
+.dark-dashboard [class~="text-gray-600"] {
+  color: #e2e8f0 !important;
+}
+
+.dark-dashboard [class~="text-gray-500"] {
+  color: #94a3b8 !important;
+}
+
+.dark-dashboard [class~="text-gray-400"] {
+  color: #cbd5e1 !important;
+}
+
+.dark-dashboard [class~="border-gray-100"],
+.dark-dashboard [class~="border-gray-200"],
+.dark-dashboard [class~="border-gray-300"] {
+  border-color: rgb(71 85 105 / 0.55) !important;
+}
+
+.dark-dashboard [class~="shadow-gray-900/10"],
+.dark-dashboard [class~="shadow-gray-900/5"] {
+  --tw-shadow-color: rgb(0 0 0 / 0.35) !important;
 }
 
 @keyframes page-enter {
