@@ -7,3 +7,4 @@ email-validator
 python-dotenv
 bcrypt
 passlib
+reportlab>=4.0.0

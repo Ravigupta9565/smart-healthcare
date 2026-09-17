@@ -10,6 +10,8 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import DownloadPdfButton from '@/components/DownloadPdfButton';
+
 
 interface RiskTrendPoint {
   month: string;
@@ -134,11 +136,12 @@ export default function AnalyticsDashboard() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/80 px-3 py-2 text-xs font-semibold text-emerald-700 shadow-sm backdrop-blur">
               <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
               FastAPI Backend: Online
             </span>
+            <DownloadPdfButton variant="compact" label="Download PDF Report" />
             <button
               type="button"
               onClick={refreshTelemetry}
@@ -147,6 +150,7 @@ export default function AnalyticsDashboard() {
               Refresh
             </button>
           </div>
+
         </header>
 
         <section aria-label="Model telemetry metrics" className="grid gap-4 md:grid-cols-3">
@@ -181,7 +185,11 @@ export default function AnalyticsDashboard() {
           })}
         </section>
 
+        {/* PDF Export Banner Card */}
+        <DownloadPdfButton variant="glass-card" />
+
         <section
+
           aria-labelledby="risk-trend-heading"
           className="animate-page-enter animate-delay-400 rounded-2xl border border-gray-200/80 bg-white/85 p-5 shadow-sm backdrop-blur sm:p-7"
         >

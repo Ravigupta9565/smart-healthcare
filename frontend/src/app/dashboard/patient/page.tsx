@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { apiUrl } from '@/lib/api';
+import DownloadPdfButton from '@/components/DownloadPdfButton';
 
 interface User {
   user_id?: number;
@@ -227,14 +228,21 @@ export default function PatientDashboard() {
       <div className="bg-teal-600 rounded-xl p-5 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-8 translate-x-8" />
         <div className="absolute bottom-0 right-12 w-20 h-20 bg-white/5 rounded-full translate-y-6" />
-        <div className="relative z-10">
-          <span className="inline-block text-xs font-semibold bg-white/20 border border-white/30 rounded px-2 py-0.5 mb-2 uppercase tracking-wider">
-            Demo Data — Synthetic Information
-          </span>
-          <h1 className="text-xl font-bold">Welcome Back, {user.name || 'Patient'}</h1>
-          <p className="text-teal-100 text-sm mt-1">
-            Your health metrics are synchronized. Next checkup scheduled in 4 days.
-          </p>
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span className="inline-block text-xs font-semibold bg-white/20 border border-white/30 rounded px-2 py-0.5 mb-2 uppercase tracking-wider">
+              Demo Data — Synthetic Information
+            </span>
+            <h1 className="text-xl font-bold">Welcome Back, {user.name || 'Patient'}</h1>
+            <p className="text-teal-100 text-sm mt-1">
+              Your health metrics are synchronized. Next checkup scheduled in 4 days.
+            </p>
+          </div>
+          <DownloadPdfButton
+            patientId={user.user_id || user.id}
+            label="Download PDF Report"
+            className="shrink-0"
+          />
         </div>
       </div>
 
@@ -372,8 +380,15 @@ export default function PatientDashboard() {
         </div>
       </div>
 
+      {/* PDF Medical Report Glassmorphic Card */}
+      <DownloadPdfButton
+        patientId={user.user_id || user.id}
+        variant="glass-card"
+      />
+
       {/* Quick Actions */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+
         {[
           { label: 'Book Appointment', href: '/dashboard/book-appointment', icon: '📅', color: 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100' },
           { label: 'AI Assistant', href: '/dashboard/ai-assistant', icon: '🤖', color: 'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100' },

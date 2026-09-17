@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, appointments, health_metrics, medicines
+from app.api import auth, appointments, health_metrics, medicines, patients
 from app.database.database import initialize_database
 
 # Import all models so SQLAlchemy creates their tables
@@ -53,6 +53,7 @@ app.include_router(auth.router)
 app.include_router(appointments.router)
 app.include_router(health_metrics.router)
 app.include_router(medicines.router)
+app.include_router(patients.router)
 
 
 @app.get("/")
@@ -65,10 +66,12 @@ def root():
             "/api/appointments",
             "/api/health-metrics",
             "/api/medicines",
+            "/api/patients/{patient_id}/export-pdf",
             "/docs",
             "/health",
         ],
     }
+
 
 
 @app.get("/health")
