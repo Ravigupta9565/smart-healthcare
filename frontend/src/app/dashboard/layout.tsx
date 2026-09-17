@@ -335,13 +335,13 @@ export default function DashboardLayout({
                 alt="Ravi Gupta"
                 width={80}
                 height={80}
-                className="h-full w-full object-cover"
+                className="h-full w-full scale-110 object-cover"
               />
             </div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">Developer Profile</p>
             <h2 id="developer-profile-title" className="mt-2 text-xl font-bold">Ravi Gupta</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-300">
-              B.Tech CSE CCML 3rd Year, BBD University
+              B.Tech CSE (CCML) • 3rd Year | BBD University
             </p>
             <a
               href="https://github.com/Raviguptaji9565"
