@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { Code2, UserRound, X } from 'lucide-react';
 
 interface User {
   user_id?: number;
@@ -85,6 +87,8 @@ export default function DashboardLayout({
   const [loading, setLoading] = useState(true);
   const [activeView, setActiveView] = useState<ViewRole>('patient');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [developerProfileOpen, setDeveloperProfileOpen] = useState(false);
+  const [developerProfileClosing, setDeveloperProfileClosing] = useState(false);
 
   useEffect(() => {
     try {
@@ -105,6 +109,33 @@ export default function DashboardLayout({
       setLoading(false);
     }
   }, [router]);
+
+  useEffect(() => {
+    if (!developerProfileOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeDeveloperProfile();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [developerProfileOpen]);
+
+  const openDeveloperProfile = () => {
+    setDeveloperProfileClosing(false);
+    setDeveloperProfileOpen(true);
+  };
+
+  const closeDeveloperProfile = () => {
+    if (developerProfileClosing) return;
+    setDeveloperProfileClosing(true);
+    window.setTimeout(() => {
+      setDeveloperProfileOpen(false);
+      setDeveloperProfileClosing(false);
+    }, 160);
+  };
 
   const handleLogout = () => {
     window.localStorage.removeItem('user');
@@ -240,17 +271,31 @@ export default function DashboardLayout({
           <span>Notice: General health decision-support system. Does not constitute clinical medical diagnosis.</span>
         </div>
 
-        {/* Mobile Header */}
-        <div className="lg:hidden flex items-center gap-3 px-4 py-3 bg-slate-900/80 border-b border-slate-700/60 shrink-0 backdrop-blur-xl">
+        {/* Dashboard Header */}
+        <div className="flex items-center justify-between gap-3 px-4 py-3 bg-slate-900/80 border-b border-slate-700/60 shrink-0 backdrop-blur-xl sm:px-6">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setSidebarOpen(true)}
+              className="text-slate-300 hover:text-white lg:hidden"
+              aria-label="Open navigation menu"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <span className="font-semibold text-white text-sm">SmartHealth AI</span>
+          </div>
           <button
-            onClick={() => setSidebarOpen(true)}
-            className="text-slate-300 hover:text-white"
+            type="button"
+            onClick={openDeveloperProfile}
+            className="inline-flex items-center gap-2 rounded-xl border border-teal-400/25 bg-slate-800/60 px-3 py-2 text-xs font-semibold text-slate-200 shadow-sm backdrop-blur transition hover:border-teal-300/60 hover:bg-teal-500/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400/50"
+            aria-haspopup="dialog"
+            aria-expanded={developerProfileOpen}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <UserRound className="h-3.5 w-3.5 text-teal-300" />
+            <span>Developer Profile</span>
           </button>
-          <span className="font-semibold text-white text-sm">SmartHealth AI</span>
         </div>
 
         {/* Page Content */}
@@ -258,6 +303,58 @@ export default function DashboardLayout({
           {children}
         </main>
       </div>
+
+      {developerProfileOpen && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-sm ${
+            developerProfileClosing ? 'modal-backdrop-exit' : 'modal-backdrop-enter'
+          }`}
+          onClick={closeDeveloperProfile}
+          role="presentation"
+        >
+          <section
+            className={`relative w-full max-w-sm rounded-2xl border border-teal-400/25 bg-slate-900/95 p-6 text-center text-white shadow-2xl shadow-slate-950/60 backdrop-blur-xl ${
+              developerProfileClosing ? 'modal-panel-exit' : 'modal-panel-enter'
+            }`}
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="developer-profile-title"
+          >
+            <button
+              type="button"
+              onClick={closeDeveloperProfile}
+              className="absolute right-3 top-3 rounded-lg p-2 text-slate-400 transition hover:bg-slate-800 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400/50"
+              aria-label="Close developer profile"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <div className="mx-auto mb-4 h-20 w-20 overflow-hidden rounded-full border-2 border-teal-400/50 bg-gradient-to-br from-teal-500/30 to-blue-500/20 shadow-lg shadow-teal-950/40">
+              <Image
+                src="/images/ravi.jpg"
+                alt="Ravi Gupta"
+                width={80}
+                height={80}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">Developer Profile</p>
+            <h2 id="developer-profile-title" className="mt-2 text-xl font-bold">Ravi Gupta</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-300">
+              B.Tech CSE CCML 3rd Year, BBD University
+            </p>
+            <a
+              href="https://github.com/Raviguptaji9565"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-600 bg-slate-800/80 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-teal-400/60 hover:bg-teal-500/15 hover:text-white"
+            >
+              <Code2 className="h-4 w-4" />
+              View GitHub Profile
+            </a>
+          </section>
+        </div>
+      )}
     </div>
   );
 }
