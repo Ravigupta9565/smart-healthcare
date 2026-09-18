@@ -68,6 +68,7 @@ const TEAM_CARDS: TeamMemberCard[] = [
     name: 'Dhuru Madhuwal',
     role: 'AI/ML & Healthcare Intelligence Engineer',
     institution: 'BBD University • Academic Capstone 2026',
+    image: '/images/dhuru.jpg',
     initials: 'DM',
     avatarBg: 'from-indigo-600 via-purple-700 to-cyan-900',
     executiveContribution:
@@ -97,6 +98,7 @@ const TEAM_CARDS: TeamMemberCard[] = [
     name: 'Shikhar Srivastava',
     role: 'Frontend & Mobile UI Developer & UX Designer',
     institution: 'BBD University • Academic Capstone 2026',
+    image: '/images/shikhar.jpg',
     initials: 'SS',
     avatarBg: 'from-emerald-600 via-teal-700 to-cyan-900',
     executiveContribution:
@@ -126,6 +128,7 @@ const TEAM_CARDS: TeamMemberCard[] = [
     name: 'Sachin Yadav',
     role: 'Backend, Database & API Infrastructure Engineer',
     institution: 'BBD University • Academic Capstone 2026',
+    image: '/images/sachin.jpg',
     initials: 'SY',
     avatarBg: 'from-blue-600 via-indigo-700 to-cyan-900',
     executiveContribution:
@@ -476,4 +479,3 @@ export default function TeamPage() {
     </div>
   );
 }
-
