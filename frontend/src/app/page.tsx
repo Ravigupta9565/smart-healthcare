@@ -145,9 +145,9 @@ export default function Home() {
             AI-Powered Healthcare Management System
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6 animate-page-enter animate-delay-100">
+          <h1 className="hero-heading text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 animate-page-enter animate-delay-100">
             Next-Generation{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600">
+            <span>
               Healthcare
             </span>{' '}
             for Everyone

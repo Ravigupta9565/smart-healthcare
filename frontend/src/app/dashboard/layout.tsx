@@ -32,6 +32,13 @@ const NAV_ITEMS = [
     match: (p: string) => p === '/dashboard/ai-assistant',
   },
   {
+    label: 'Scan Analyzer',
+    href: '/dashboard/imaging',
+    icon: '◉',
+    roles: ['patient', 'doctor'],
+    match: (p: string) => p === '/dashboard/imaging',
+  },
+  {
     label: 'Risk Assessment',
     href: '/dashboard/risk-assessment',
     icon: '⚠',
