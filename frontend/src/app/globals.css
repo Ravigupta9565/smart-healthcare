@@ -188,6 +188,44 @@ body {
   animation: slide-in-left 0.45s ease-out both;
 }
 
+.tech-network {
+  opacity: 0.48;
+}
+
+.tech-network__lines {
+  stroke: rgb(45 212 191 / 0.23);
+  stroke-width: 1;
+  stroke-dasharray: 3 12;
+  animation: network-drift 18s linear infinite;
+}
+
+.tech-network__nodes {
+  fill: rgb(94 234 212 / 0.78);
+  filter: drop-shadow(0 0 6px rgb(45 212 191 / 0.75));
+  animation: network-pulse 5s ease-in-out infinite;
+}
+
+.tech-network__helix {
+  stroke: rgb(56 189 248 / 0.48);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 7px rgb(45 212 191 / 0.42));
+  animation: helix-pulse 7s ease-in-out infinite;
+}
+
+@keyframes network-drift {
+  to { stroke-dashoffset: -120; }
+}
+
+@keyframes network-pulse {
+  0%, 100% { opacity: 0.58; }
+  50% { opacity: 1; }
+}
+
+@keyframes helix-pulse {
+  0%, 100% { opacity: 0.45; transform: translateX(0); }
+  50% { opacity: 0.9; transform: translateX(-3px); }
+}
+
 .animate-delay-100 { animation-delay: 100ms; }
 .animate-delay-200 { animation-delay: 200ms; }
 .animate-delay-300 { animation-delay: 300ms; }
@@ -202,6 +240,12 @@ body {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .tech-network__lines,
+  .tech-network__nodes,
+  .tech-network__helix {
+    animation: none;
   }
 
   .dashboard-card:hover {

@@ -86,17 +86,45 @@ export default function Home() {
       </header>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-blue-50 pt-20 pb-24 px-6">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-100/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-float" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-100/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float animate-delay-300" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-teal-950 pt-20 pb-24 px-6">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-float" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float animate-delay-300" />
+
+        <svg
+          className="tech-network absolute inset-0 h-full w-full pointer-events-none"
+          viewBox="0 0 1200 620"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <g className="tech-network__lines" fill="none" strokeLinecap="round">
+            <path d="M38 128 185 78 310 170 438 96 580 154 735 68 884 142 1020 78 1170 154" />
+            <path d="M78 432 210 348 348 470 488 356 625 448 770 330 918 420 1062 310 1178 392" />
+            <path d="M185 78 210 348M310 170 348 470M438 96 488 356M580 154 625 448M735 68 770 330M884 142 918 420M1020 78 1062 310" />
+            <path d="M38 128 78 432M1170 154 1178 392" />
+          </g>
+          <g className="tech-network__nodes">
+            {[
+              [38, 128], [185, 78], [310, 170], [438, 96], [580, 154], [735, 68],
+              [884, 142], [1020, 78], [1170, 154], [78, 432], [210, 348], [348, 470],
+              [488, 356], [625, 448], [770, 330], [918, 420], [1062, 310], [1178, 392],
+            ].map(([cx, cy], index) => (
+              <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index % 3 === 0 ? 3 : 2} />
+            ))}
+          </g>
+          <g className="tech-network__helix" fill="none" strokeLinecap="round">
+            <path d="M930 164 C1015 204 1015 270 930 310 C845 350 845 416 930 456" />
+            <path d="M1010 164 C925 204 925 270 1010 310 C1095 350 1095 416 1010 456" />
+            <path d="M950 177 990 177M930 225 1010 225M930 273 1010 273M950 321 990 321M930 369 1010 369M930 417 1010 417" />
+          </g>
+        </svg>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-xs font-semibold text-teal-700 mb-6 animate-slide-in-left">
-            <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-400/10 border border-teal-300/30 text-xs font-semibold text-teal-200 mb-6 animate-slide-in-left">
+            <span className="w-2 h-2 rounded-full bg-teal-300 animate-pulse" />
             AI-Powered Healthcare Management System
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight mb-6 animate-page-enter animate-delay-100">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6 animate-page-enter animate-delay-100">
             Next-Generation{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600">
               Healthcare
@@ -104,7 +132,7 @@ export default function Home() {
             for Everyone
           </h1>
 
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed mb-8 animate-page-enter animate-delay-200">
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8 animate-page-enter animate-delay-200">
             Monitor your health metrics, book appointments, track medications, and get AI health insights —
             all in one professional platform designed for patients and doctors.
           </p>
