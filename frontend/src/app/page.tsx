@@ -91,16 +91,29 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float animate-delay-300" />
 
         <svg
-          className="tech-network absolute inset-0 h-full w-full pointer-events-none"
+          className="tech-network absolute inset-0 z-0 h-full w-full pointer-events-none"
           viewBox="0 0 1200 620"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
+          <g className="tech-network__brain" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M530 302c-30-38-8-86 38-91 13-36 64-42 88-10 38-20 83 8 78 51 39 15 42 70 7 94 7 42-36 69-70 49-30 28-80 17-91-22-42 1-67-32-50-71Z" />
+            <path d="M602 212c-18 24-18 48 0 72s18 48 0 72 18 48 0 72M548 254h40l23-27M656 229l-22 38 32 31-40 33 28 36M540 318l38-1 24 25M624 212v26l-22 22M624 362l-22 23" />
+            <circle cx="602" cy="212" r="4" />
+            <circle cx="548" cy="254" r="3" />
+            <circle cx="656" cy="229" r="3" />
+            <circle cx="578" cy="317" r="3" />
+            <circle cx="624" cy="362" r="3" />
+          </g>
           <g className="tech-network__lines" fill="none" strokeLinecap="round">
             <path d="M38 128 185 78 310 170 438 96 580 154 735 68 884 142 1020 78 1170 154" />
             <path d="M78 432 210 348 348 470 488 356 625 448 770 330 918 420 1062 310 1178 392" />
             <path d="M185 78 210 348M310 170 348 470M438 96 488 356M580 154 625 448M735 68 770 330M884 142 918 420M1020 78 1062 310" />
             <path d="M38 128 78 432M1170 154 1178 392" />
+          </g>
+          <g className="tech-network__streams" fill="none" strokeLinecap="round">
+            <path d="M-20 520 C180 400 270 560 460 430 S760 330 940 470 S1120 520 1220 390" />
+            <path d="M-20 190 C150 270 240 130 410 215 S700 300 860 190 S1080 110 1220 220" />
           </g>
           <g className="tech-network__nodes">
             {[
@@ -109,6 +122,14 @@ export default function Home() {
               [488, 356], [625, 448], [770, 330], [918, 420], [1062, 310], [1178, 392],
             ].map(([cx, cy], index) => (
               <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index % 3 === 0 ? 3 : 2} />
+            ))}
+          </g>
+          <g className="tech-network__particles">
+            {[
+              [136, 275], [270, 118], [405, 294], [538, 520], [710, 228],
+              [832, 520], [974, 262], [1108, 470], [1140, 90],
+            ].map(([cx, cy], index) => (
+              <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={index % 2 === 0 ? 2.5 : 1.5} />
             ))}
           </g>
           <g className="tech-network__helix" fill="none" strokeLinecap="round">

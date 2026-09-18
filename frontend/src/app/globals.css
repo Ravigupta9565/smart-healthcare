@@ -189,7 +189,17 @@ body {
 }
 
 .tech-network {
-  opacity: 0.48;
+  opacity: 0.42;
+  contain: paint;
+}
+
+.tech-network__brain {
+  stroke: rgb(125 211 252 / 0.22);
+  stroke-width: 1.4;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rotate-slow 60s linear infinite;
+  filter: drop-shadow(0 0 9px rgb(45 212 191 / 0.28));
 }
 
 .tech-network__lines {
@@ -199,10 +209,23 @@ body {
   animation: network-drift 18s linear infinite;
 }
 
+.tech-network__streams {
+  stroke: rgb(56 189 248 / 0.22);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 22;
+  animation: stream-flow 24s linear infinite;
+}
+
 .tech-network__nodes {
   fill: rgb(94 234 212 / 0.78);
   filter: drop-shadow(0 0 6px rgb(45 212 191 / 0.75));
   animation: network-pulse 5s ease-in-out infinite;
+}
+
+.tech-network__particles {
+  fill: rgb(125 211 252 / 0.72);
+  filter: drop-shadow(0 0 5px rgb(56 189 248 / 0.7));
+  animation: particle-float 8s ease-in-out infinite;
 }
 
 .tech-network__helix {
@@ -216,9 +239,22 @@ body {
   to { stroke-dashoffset: -120; }
 }
 
+@keyframes rotate-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes stream-flow {
+  to { stroke-dashoffset: -192; }
+}
+
 @keyframes network-pulse {
   0%, 100% { opacity: 0.58; }
   50% { opacity: 1; }
+}
+
+@keyframes particle-float {
+  0%, 100% { opacity: 0.32; transform: translate3d(0, 5px, 0); }
+  50% { opacity: 0.78; transform: translate3d(0, -8px, 0); }
 }
 
 @keyframes helix-pulse {
@@ -243,7 +279,10 @@ body {
   }
 
   .tech-network__lines,
+  .tech-network__brain,
+  .tech-network__streams,
   .tech-network__nodes,
+  .tech-network__particles,
   .tech-network__helix {
     animation: none;
   }
