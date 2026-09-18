@@ -189,10 +189,40 @@ body {
 }
 
 .tech-network {
-  opacity: 0.42;
+  opacity: 0.55;
   contain: paint;
   will-change: transform;
   animation: ambient-drift 26s ease-in-out infinite;
+}
+
+.hero-background {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-background::before {
+  position: absolute;
+  inset: -12%;
+  content: "";
+  background-image:
+    linear-gradient(rgb(45 212 191 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(56 189 248 / 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at center, black 10%, transparent 76%);
+  animation: grid-drift 28s linear infinite;
+  will-change: transform;
+}
+
+.hero-background__glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(62vw, 760px);
+  height: min(62vw, 760px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(20 184 166 / 0.12), transparent 68%);
+  transform: translate(-50%, -50%);
+  animation: glow-breathe 25s ease-in-out infinite;
 }
 
 .hero-heading {
@@ -265,6 +295,15 @@ body {
   50% { transform: translate3d(-0.7%, -0.8%, 0) scale(1.045); }
 }
 
+@keyframes grid-drift {
+  to { transform: translate3d(72px, 72px, 0); }
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.95); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.08); }
+}
+
 @keyframes heading-shimmer {
   0%, 58%, 100% { background-position: 100% 0; }
   76%, 88% { background-position: -100% 0; }
@@ -310,6 +349,8 @@ body {
   }
 
   .tech-network__lines,
+  .hero-background::before,
+  .hero-background__glow,
   .tech-network,
   .hero-heading,
   .tech-network__brain,

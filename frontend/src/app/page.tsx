@@ -90,12 +90,13 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-float" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-float animate-delay-300" />
 
-        <svg
-          className="tech-network absolute inset-0 z-0 h-full w-full pointer-events-none"
-          viewBox="0 0 1200 620"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
+        <div className="hero-background absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+          <div className="hero-background__glow" />
+          <svg
+            className="tech-network h-full w-full"
+            viewBox="0 0 1200 620"
+            preserveAspectRatio="none"
+          >
           <g className="tech-network__brain" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path d="M530 302c-30-38-8-86 38-91 13-36 64-42 88-10 38-20 83 8 78 51 39 15 42 70 7 94 7 42-36 69-70 49-30 28-80 17-91-22-42 1-67-32-50-71Z" />
             <path d="M602 212c-18 24-18 48 0 72s18 48 0 72 18 48 0 72M548 254h40l23-27M656 229l-22 38 32 31-40 33 28 36M540 318l38-1 24 25M624 212v26l-22 22M624 362l-22 23" />
@@ -137,7 +138,8 @@ export default function Home() {
             <path d="M1010 164 C925 204 925 270 1010 310 C1095 350 1095 416 1010 456" />
             <path d="M950 177 990 177M930 225 1010 225M930 273 1010 273M950 321 990 321M930 369 1010 369M930 417 1010 417" />
           </g>
-        </svg>
+          </svg>
+        </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-400/10 border border-teal-300/30 text-xs font-semibold text-teal-200 mb-6 animate-slide-in-left">
