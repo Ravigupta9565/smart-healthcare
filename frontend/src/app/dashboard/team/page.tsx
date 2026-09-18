@@ -30,7 +30,7 @@ interface TeamMemberCard {
 const TEAM_CARDS: TeamMemberCard[] = [
   {
     id: 'ravi-gupta',
-    cardIndex: '01 / 03',
+    cardIndex: '01 / 04',
     tag: 'Team Leader',
     tagIcon: '⚙️',
     ribbon: '👑 TEAM LEADER',
@@ -61,7 +61,7 @@ const TEAM_CARDS: TeamMemberCard[] = [
   },
   {
     id: 'dhuru-madhuwal',
-    cardIndex: '02 / 03',
+    cardIndex: '02 / 04',
     tag: 'Core Developer',
     tagIcon: '⚙️',
     ribbon: '🧠 DEVELOPER LEAD',
@@ -91,7 +91,7 @@ const TEAM_CARDS: TeamMemberCard[] = [
   },
   {
     id: 'shikhar-srivastava',
-    cardIndex: '03 / 03',
+    cardIndex: '03 / 04',
     tag: 'Lead Author',
     tagIcon: '✦',
     ribbon: '✍️ GIT CONTRIBUTOR',
@@ -117,6 +117,35 @@ const TEAM_CARDS: TeamMemberCard[] = [
       'Recharts',
       'Lucide Icons',
       'HTML5/CSS3',
+    ],
+  },
+  {
+    id: 'sachin-yadav',
+    cardIndex: '04 / 04',
+    tag: 'Backend Engineer',
+    tagIcon: '⚡',
+    ribbon: '🗄️ BACKEND & DB LEAD',
+    name: 'Sachin',
+    role: 'Backend Engineer • Database & API Lead',
+    institution: 'BBD University • Academic Capstone 2026',
+    image: '/images/sachin.jpg',
+    initials: 'SY',
+    avatarBg: 'from-blue-600 via-indigo-700 to-cyan-900',
+    executiveContribution:
+      'Designed reliable backend services, healthcare data models, authentication flows, and API infrastructure that keep appointments, medicines, and clinical metrics consistent across the platform.',
+    coreDeliverables: [
+      { icon: '⚡', text: 'Healthcare Database Schema & SQLAlchemy Models' },
+      { icon: '🌐', text: 'Appointments, Medicines & Health Metrics APIs' },
+      { icon: '📊', text: 'Secure Authentication and Role-Based Access' },
+      { icon: '⚙️', text: 'Backend Data Integrity and Service Integration' },
+    ],
+    techStack: [
+      'Python 3.13',
+      'FastAPI',
+      'SQLAlchemy',
+      'SQLite',
+      'Pydantic v2',
+      'Bcrypt',
     ],
   },
 ];
@@ -172,7 +201,7 @@ export default function TeamPage() {
           <span>Engineering Flashcard</span>
           <span className="text-cyan-600">•</span>
           <span className="text-cyan-300 font-bold tracking-wider">
-            {viewMode === 'flashcard' ? activeCard.cardIndex : `ALL 03 CARDS`}
+            {viewMode === 'flashcard' ? activeCard.cardIndex : `ALL 04 CARDS`}
           </span>
         </div>
 
@@ -369,8 +398,8 @@ export default function TeamPage() {
           </p>
         </div>
       ) : (
-        /* Grid Showcase Mode (All 3 Cards Displayed) */
-        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 z-10 my-4 animate-page-enter">
+        /* Grid Showcase Mode (All 4 Cards Displayed) */
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 z-10 my-4 animate-page-enter">
           {TEAM_CARDS.map((member, idx) => (
             <div
               key={member.id}
