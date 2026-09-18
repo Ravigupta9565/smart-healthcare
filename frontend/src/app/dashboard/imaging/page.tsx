@@ -17,10 +17,13 @@ import {
 
 const ACCEPTED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'application/dicom'];
 const ACCEPTED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.dcm', '.dicom'];
+const DEMO_SAMPLE_URL = 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Chest_Xray_PA_3-8-2010.png';
 
 interface AnalysisResult {
   classification: string;
   confidence: string;
+  risk: string;
+  observations: string;
   summary: string;
   recommendations: string[];
   tone: 'normal' | 'attention';
@@ -36,6 +39,7 @@ export default function ImagingAnalyzerPage() {
   const previewUrlRef = useRef<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isDemoSample, setIsDemoSample] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
@@ -49,6 +53,7 @@ export default function ImagingAnalyzerPage() {
     if (!selectedFile) return;
     setError('');
     setResult(null);
+    setIsDemoSample(false);
 
     if (selectedFile.size > 25 * 1024 * 1024) {
       setError('Please choose a file smaller than 25 MB.');
@@ -69,6 +74,25 @@ export default function ImagingAnalyzerPage() {
     setPreviewUrl(nextPreviewUrl);
   };
 
+  const loadDemoSample = () => {
+    if (previewUrlRef.current) URL.revokeObjectURL(previewUrlRef.current);
+    previewUrlRef.current = null;
+    setError('');
+    setIsAnalyzing(false);
+    setIsDemoSample(true);
+    setFile(new File(['demo chest x-ray sample'], 'demo-chest-xray.png', { type: 'image/png' }));
+    setPreviewUrl(DEMO_SAMPLE_URL);
+    setResult({
+      classification: 'No Acute Cardiopulmonary Abnormalities',
+      confidence: '98.2%',
+      risk: 'Low Risk',
+      observations: 'Cardiac silhouette and mediastinum within normal limits. Clear lung fields bilaterally.',
+      summary: 'The demo chest X-ray follows a normal reference pattern with no acute cardiopulmonary finding identified.',
+      recommendations: ['Routine follow-up.', 'No immediate clinical intervention required.'],
+      tone: 'normal',
+    });
+  };
+
   const handleFileInput = (event: ChangeEvent<HTMLInputElement>) => {
     selectFile(event.target.files?.[0]);
     event.target.value = '';
@@ -85,6 +109,7 @@ export default function ImagingAnalyzerPage() {
     previewUrlRef.current = null;
     setFile(null);
     setPreviewUrl(null);
+    setIsDemoSample(false);
     setResult(null);
     setError('');
   };
@@ -98,6 +123,8 @@ export default function ImagingAnalyzerPage() {
       setResult({
         classification: 'No acute findings detected',
         confidence: '94.8%',
+        risk: 'Low Risk',
+        observations: 'No high-risk feature was identified in this demonstration analysis.',
         summary: 'The uploaded scan is within the expected reference pattern for this demonstration analysis.',
         recommendations: [
           'Review the scan and AI summary with a qualified clinician.',
@@ -167,6 +194,13 @@ export default function ImagingAnalyzerPage() {
               >
                 Browse files
               </button>
+              <button
+                type="button"
+                onClick={loadDemoSample}
+                className="mt-3 block w-full text-xs font-semibold text-cyan-300 transition hover:text-cyan-100"
+              >
+                Load Demo Sample
+              </button>
               <input ref={inputRef} type="file" accept=".png,.jpg,.jpeg,.dcm,.dicom,image/png,image/jpeg,application/dicom" onChange={handleFileInput} className="sr-only" />
             </div>
           ) : (
@@ -181,7 +215,14 @@ export default function ImagingAnalyzerPage() {
                 </button>
               </div>
               <div className="flex min-h-64 items-center justify-center bg-[radial-gradient(circle_at_center,_rgba(20,184,166,0.12),_transparent_62%)] p-4">
-                {previewUrl ? (
+                {previewUrl && isDemoSample ? (
+                  <div
+                    className="h-80 w-full rounded-lg bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url("${previewUrl}")` }}
+                    role="img"
+                    aria-label="Demo chest X-ray preview"
+                  />
+                ) : previewUrl ? (
                   <div className="relative h-80 w-full">
                     <Image
                       src={previewUrl}
@@ -213,6 +254,15 @@ export default function ImagingAnalyzerPage() {
             {isAnalyzing ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <BrainCircuit className="h-4 w-4" />}
             {isAnalyzing ? 'Running deep learning inference...' : 'Analyze with AI Scan Model'}
           </button>
+          {file && (
+            <button
+              type="button"
+              onClick={loadDemoSample}
+              className="mt-3 w-full rounded-lg border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-300 transition hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-200"
+            >
+              Load Demo Sample
+            </button>
+          )}
         </section>
 
         <aside className="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-5 shadow-2xl shadow-slate-950/30 backdrop-blur-xl md:p-6">
@@ -251,11 +301,15 @@ export default function ImagingAnalyzerPage() {
                     <div>
                       <p className="text-xs uppercase tracking-wider text-slate-400">Detected condition / classification</p>
                       <p className="mt-1 font-semibold text-emerald-200">{result.classification}</p>
+                      <p className="mt-1 text-xs font-medium text-cyan-200">Risk stratification: {result.risk}</p>
                     </div>
                   </div>
                   <span className="whitespace-nowrap text-sm font-bold text-cyan-200">{result.confidence}</span>
                 </div>
                 <p className="mt-4 text-xs leading-relaxed text-slate-300">{result.summary}</p>
+                <p className="mt-3 border-t border-emerald-300/10 pt-3 text-xs leading-relaxed text-slate-300">
+                  <span className="font-semibold text-slate-200">Key observations:</span> {result.observations}
+                </p>
               </div>
 
               <div className="rounded-xl border border-slate-700/60 bg-slate-950/35 p-4">
