@@ -30,7 +30,7 @@ interface TeamMemberCard {
 const TEAM_CARDS: TeamMemberCard[] = [
   {
     id: 'ravi-gupta',
-    cardIndex: '01 / 04',
+    cardIndex: '01 / 03',
     tag: 'Team Leader',
     tagIcon: '⚙️',
     ribbon: '👑 TEAM LEADER',
@@ -61,12 +61,12 @@ const TEAM_CARDS: TeamMemberCard[] = [
   },
   {
     id: 'dhuru-madhuwal',
-    cardIndex: '02 / 04',
-    tag: 'AI/ML Specialist',
-    tagIcon: '🤖',
-    ribbon: '🧠 AI/ML LEAD',
-    name: 'Dhuru Madhuwal',
-    role: 'AI/ML & Healthcare Intelligence Engineer',
+    cardIndex: '02 / 03',
+    tag: 'Core Developer',
+    tagIcon: '⚙️',
+    ribbon: '🧠 DEVELOPER LEAD',
+    name: 'Dhuru',
+    role: 'Core Developer • Developer Lead',
     institution: 'BBD University • Academic Capstone 2026',
     image: '/images/dhuru.jpg',
     initials: 'DM',
@@ -91,12 +91,12 @@ const TEAM_CARDS: TeamMemberCard[] = [
   },
   {
     id: 'shikhar-srivastava',
-    cardIndex: '03 / 04',
-    tag: 'UI/UX Architect',
-    tagIcon: '🎨',
-    ribbon: '🎨 UI/UX ARCHITECT',
-    name: 'Shikhar Srivastava',
-    role: 'Frontend & Mobile UI Developer & UX Designer',
+    cardIndex: '03 / 03',
+    tag: 'Lead Author',
+    tagIcon: '✦',
+    ribbon: '✍️ GIT CONTRIBUTOR',
+    name: 'Shikhar',
+    role: 'Lead Author • Git Contributor',
     institution: 'BBD University • Academic Capstone 2026',
     image: '/images/shikhar.jpg',
     initials: 'SS',
@@ -117,36 +117,6 @@ const TEAM_CARDS: TeamMemberCard[] = [
       'Recharts',
       'Lucide Icons',
       'HTML5/CSS3',
-    ],
-  },
-  {
-    id: 'sachin-yadav',
-    cardIndex: '04 / 04',
-    tag: 'Backend Engineer',
-    tagIcon: '⚡',
-    ribbon: '🗄️ BACKEND & DB LEAD',
-    name: 'Sachin Yadav',
-    role: 'Backend, Database & API Infrastructure Engineer',
-    institution: 'BBD University • Academic Capstone 2026',
-    image: '/images/sachin.jpg',
-    initials: 'SY',
-    avatarBg: 'from-blue-600 via-indigo-700 to-cyan-900',
-    executiveContribution:
-      'Designed and scaled the relational database schemas, SQLAlchemy ORM models, session security, password hashing, and high-performance RESTful API endpoints for appointments and medications data integrity.',
-    coreDeliverables: [
-      { icon: '⚡', text: 'Relational Schema Design for Patients, Doctors & Vitals' },
-      { icon: '🌐', text: 'SQLAlchemy ORM Integration with SQLite Data Integrity' },
-      { icon: '📊', text: 'Secure Authentication, Password Hashing & Role Guards' },
-      { icon: '⚙️', text: 'Medicines & Appointments CRUD API Endpoints' },
-    ],
-    techStack: [
-      'Python 3.13',
-      'FastAPI',
-      'SQLAlchemy',
-      'SQLite',
-      'Pydantic v2',
-      'Bcrypt',
-      'Passlib',
     ],
   },
 ];
@@ -202,7 +172,7 @@ export default function TeamPage() {
           <span>Engineering Flashcard</span>
           <span className="text-cyan-600">•</span>
           <span className="text-cyan-300 font-bold tracking-wider">
-            {viewMode === 'flashcard' ? activeCard.cardIndex : `ALL 04 CARDS`}
+            {viewMode === 'flashcard' ? activeCard.cardIndex : `ALL 03 CARDS`}
           </span>
         </div>
 
@@ -399,8 +369,8 @@ export default function TeamPage() {
           </p>
         </div>
       ) : (
-        /* Grid Showcase Mode (All 4 Cards Displayed) */
-        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 z-10 my-4 animate-page-enter">
+        /* Grid Showcase Mode (All 3 Cards Displayed) */
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 z-10 my-4 animate-page-enter">
           {TEAM_CARDS.map((member, idx) => (
             <div
               key={member.id}

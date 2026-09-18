@@ -306,8 +306,15 @@ export default function DashboardLayout({
         </div>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto bg-slate-950 animate-page-enter">
+        <main className="relative flex-1 overflow-y-auto bg-slate-950 animate-page-enter">
+          <div className="dashboard-holographic-backdrop absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+            <div className="dashboard-holographic-backdrop__grid" />
+            <div className="dashboard-holographic-backdrop__orb dashboard-holographic-backdrop__orb--teal" />
+            <div className="dashboard-holographic-backdrop__orb dashboard-holographic-backdrop__orb--blue" />
+          </div>
+          <div className="relative z-10 min-h-full">
           {children}
+          </div>
         </main>
       </div>
 
